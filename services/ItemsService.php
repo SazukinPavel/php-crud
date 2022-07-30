@@ -16,7 +16,7 @@ class ItemsService{
         $itemsQuery=mysqli_query($this->connection,'SELECT * FROM items');
         $itemsSQL=mysqli_fetch_all($itemsQuery);
         $items=array();
-        for ($i=1;$i<count($itemsSQL);$i++){
+        for ($i=0;$i<count($itemsSQL);$i++){
             $items[$i]=new Item($itemsSQL[$i]);
         }
         return $items;
@@ -35,6 +35,10 @@ class ItemsService{
         $itemSQL=mysqli_fetch_all($itemQuery);
         $item=new Item($itemSQL[0]);
         return $item;
+    }
+
+    function deleteItemById($itemId){
+        mysqli_query($this->connection,'DELETE FROM items WHERE id='.$itemId);
     }
 
 }
